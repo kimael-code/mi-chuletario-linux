@@ -156,10 +156,23 @@ sudo fuser -k 8000/tcp
 ### Información del Sistema
 
 ```bash
-# usando cat
-cat /etc/*release
+# comando cat
+cat /etc/os-release
 
-# usando inxi, más detallado (debe ser instalado)
+# comando grep (filtrar con regex)
+grep '^VERSION' /etc/os-release
+egrep '^(VERSION|NAME)=' /etc/os-release
+
+# comando lsb_release
+lsb_release -a
+
+# comando hostnamectl
+hostnamectl
+
+# comando uname
+uname -r
+
+# script inxi (más detallado y completo. Ddebe ser instalado)
 inxi -Fxnzr
 ```
 
@@ -181,6 +194,16 @@ sudo update-alternatives --config nombre
 ```bash
 # actualiza el gestor de arranque
 sudo update-grub
+```
+
+### Puertos
+
+```bash
+sudo lsof -i -P -n | grep LISTEN
+sudo netstat -tulpn | grep LISTEN
+sudo ss -tulpn | grep LISTEN
+sudo lsof -i:22 ## see a specific port such as 22 ##
+sudo nmap -sTU -O IP-address-Here
 ```
 
 ## PostgreSQL
@@ -306,3 +329,17 @@ youtube-dl --config-location /home/maikel/.config/youtube-dl/config/ url
   * `libreoffice-help-es`
   * `hyphen-es`
   * `mythes-es`
+
+## Instalando Paquetes
+
+### Instalar todos los paquetes
+
+```bash
+sudo dpkg -i *.deb
+```
+
+### Resolver dependencias
+
+```bash
+sudo apt-get install -f
+```
