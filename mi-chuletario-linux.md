@@ -206,6 +206,24 @@ sudo lsof -i:22 ## see a specific port such as 22 ##
 sudo nmap -sTU -O IP-address-Here
 ```
 
+### Kernel
+
+1. Eliminar versiones antiguas
+
+    ```bash
+    # Conocer la versión actual en uso
+    uname -a
+
+    # Listar los kernels instalados
+    dpkg --list | egrep -i --color 'linux-image|linux-headers|linux-modules' | awk '{ print $2 }'
+
+    # Desinstalar los kernels innecesarios
+    sudo apt purge linux-headers-X.X.X-XX
+
+    # Actualizar el GRUB
+    sudo update-grub
+    ```
+
 ## PostgreSQL
 
 Configuración básica inicial:
